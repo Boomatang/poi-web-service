@@ -7,7 +7,7 @@ const POI = {
   find: {
     auth: false,
     handler: async function (request, h) {
-      const pois = await Poi.find().populate('category');
+      const pois = await Poi.find();
       return pois
 
     }
@@ -32,7 +32,13 @@ const POI = {
   create: {
     auth: false,
     handler: async function (request, h) {
-      return "view world"
+      console.log(request.payload);
+      const newPoi = new Poi(request.payload);
+      const poi = await newPoi.save();
+      if (poi){
+        return h.response(poi).code(201);
+      }
+      return Boom.badImplementation("error creating poi")
 
     }
   },

@@ -1,0 +1,36 @@
+{
+  "poiService": "http://localhost:3000",
+  "POI": [
+    {
+      "name": "Sample Island",
+      "description": "The first Island ever made",
+      "category": "Up North",
+      "geo": {
+        "lat": 999.99,
+        "long": 949.949
+      },
+      "image": "Link to first image"
+    },
+    {
+      "name": "Basic Island",
+      "description": "The second Island ever made",
+      "category": "Down South",
+      "geo": {
+        "lat": 444.99,
+        "long": 222.949
+      },
+      "image": "Link to second image"
+    }
+  ],
+
+  "newPoi": {
+    "name": "New Island",
+    "description": "The Third Island ever made",
+    "category": "In the middle",
+    "geo": {
+      "lat": 111.99,
+      "long": 555.949
+    },
+    "image": "Link to third image"
+  }
+}

@@ -11,10 +11,11 @@ const poiSchema = new Schema({
     long: Number
   },
   image: String,
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category'
-  }
+  category: String,
+  // category: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Category'
+  // }
 });
 
 poiSchema.statics.findById = function(id){

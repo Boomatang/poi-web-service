@@ -2,7 +2,7 @@
 
 const Hapi = require('hapi');
 const dotenv = require('dotenv');
-// require('./app/models/db');
+require('./app/models/db');
 
 const result = dotenv.config();
 if(result.error){

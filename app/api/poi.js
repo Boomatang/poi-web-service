@@ -1,20 +1,34 @@
 'use strict';
 
-const Poi = {
+const Poi = require('../models/poi');
+
+
+const POI = {
   find: {
     auth: false,
     handler: async function (request, h) {
-      return "home world"
+      const pois = await Poi.find().populate('category');
+      return pois
 
     }
   },
+
   findOne: {
     auth: false,
     handler: async function (request, h) {
-      return "create world"
+      try {
+        const poi = await Poi.findOne({_id: request.params.id});
+        if (!poi) {
+          return Boom.notFound('No POI with this id');
+        }
+        return poi;
+      } catch (err) {
+        return Boom.notFound('No POI with this id');
+      }
 
     }
   },
+
   create: {
     auth: false,
     handler: async function (request, h) {
@@ -25,19 +39,23 @@ const Poi = {
   deleteOne: {
     auth: false,
     handler: async function (request, h) {
-      return "delete world"
-
+      const response = await Poi.deleteOne({_id: request.params.id});
+      if (response.deletedCount == 1) {
+        return {success: true};
+      }
+      return Boom.notFound('id not found');
     }
   },
+
   deleteAll: {
     auth: false,
     handler: async function (request, h) {
-      return "delete world"
-
+      await Poi.deleteMany({});
+      return {success: true};
     }
   }
 
 
 };
 
-module.exports = Poi;
+module.exports = POI;

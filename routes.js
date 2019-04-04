@@ -11,4 +11,12 @@ module.exports = [
   {method: 'POST', path: '/api/poi', config: POI.create},
   {method: 'DELETE', path: '/api/poi/{id}', config: POI.deleteOne},
   {method: 'DELETE', path: '/api/poi', config: POI.deleteAll},
+
+
+  {method: 'GET', path: '/api/user', config: Accounts.find},
+  {method: 'GET', path: '/api/user/{id}', config: Accounts.findOne},
+  {method: 'POST', path: '/api/user', config: Accounts.create},
+  {method: 'DELETE', path: '/api/user', config: Accounts.deleteAll},
+  {method: 'DELETE', path: '/api/user/{id}', config: Accounts.deleteOne},
+
 ];

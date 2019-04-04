@@ -25,7 +25,7 @@ userSchema.statics.deleteById = function(id) {
     else
       console.log("Entry has been deleted");
   });
-}
+};
 
 userSchema.methods.comparePassword = function(candidatePassword){
   const isMatch = this.password === candidatePassword;

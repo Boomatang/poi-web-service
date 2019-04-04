@@ -32,5 +32,33 @@
       "long": 555.949
     },
     "image": "Link to third image"
+  },
+
+  "USER": [
+    {
+      "firstName": "James",
+      "lastName": "Jones",
+      "email": "james@jones.com",
+      "password": "cat"
+    },
+    {
+      "firstName": "Tom",
+      "lastName": "Jones",
+      "email": "tom@jones.com",
+      "password": "cat"
+    },
+    {
+      "firstName": "Clare",
+      "lastName": "Jones",
+      "email": "clare@jones.com",
+      "password": "cat"
+    }
+  ],
+
+  "newUser": {
+    "firstName": "Martin",
+    "lastName": "Jones",
+    "email": "martin@jones.com",
+    "password": "cat"
   }
 }

@@ -1,5 +1,6 @@
 'use strict';
 
+const Boom = require('boom');
 const Poi = require('../models/poi');
 
 

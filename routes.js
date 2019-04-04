@@ -15,6 +15,7 @@ module.exports = [
 
   {method: 'GET', path: '/api/user', config: Accounts.find},
   {method: 'GET', path: '/api/user/{id}', config: Accounts.findOne},
+  {method: 'POST', path: '/api/user/email', config: Accounts.findByEmail},
   {method: 'POST', path: '/api/user', config: Accounts.create},
   {method: 'DELETE', path: '/api/user', config: Accounts.deleteAll},
   {method: 'DELETE', path: '/api/user/{id}', config: Accounts.deleteOne},

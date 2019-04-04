@@ -70,6 +70,16 @@ class PoiService {
     }
   }
 
+  async getUserByEmail(email) {
+    try {
+      const response = await axios.post(this.baseUrl + '/api/user/email', email);
+      return response.data;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
   async getUsers() {
     try {
       const response = await axios.get(this.baseUrl + '/api/user');

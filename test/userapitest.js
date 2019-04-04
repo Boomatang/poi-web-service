@@ -31,6 +31,12 @@ suite('Users API tests', function() {
     assert.deepEqual(u1, u2);
   });
 
+  test('get user by email', async function() {
+    const u1 = await poiService.createUser(newUser);
+    const u2 = await poiService.getUserByEmail({email: u1.email});
+    assert.deepEqual(u1, u2);
+  });
+
   test('get invalid user', async function() {
     const u1 = await poiService.getUser('1234');
     assert.isNull(u1);

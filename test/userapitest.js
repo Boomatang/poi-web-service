@@ -11,13 +11,17 @@ suite('Users API tests', function() {
 
   const poiService = new PoiService(fixtures.poiService);
 
-  setup(async function(){
+  suiteSetup(async function(){
     await poiService.deleteAllUsers();
+    const returnedUser = await poiService.createUser(newUser);
+    const response = await poiService.authenticate(newUser);
   });
 
-  teardown(async function(){
+  suiteTeardown(async function () {
     await poiService.deleteAllUsers();
+    await poiService.clearAuth();
   });
+
 
   test('create a user', async function() {
     const returnedUser = await poiService.createUser(newUser);
@@ -32,6 +36,7 @@ suite('Users API tests', function() {
   });
 
   test('get user by email', async function() {
+    await poiService.deleteAllUsers();
     const u1 = await poiService.createUser(newUser);
     const u2 = await poiService.getUserByEmail({email: u1.email});
     assert.deepEqual(u1, u2);
@@ -55,18 +60,33 @@ suite('Users API tests', function() {
   });
 
   test('get all user', async function() {
+    await poiService.deleteAllUsers();
+    await poiService.createUser(newUser);
+    await poiService.authenticate(newUser);
     for (let u of users) {
       await poiService.createUser(u);
     }
 
     const allUsers = await poiService.getUsers();
-    assert.equal(allUsers.length, users.length);
+    assert.equal(allUsers.length, users.length + 1);
   });
 
   test('get user detail', async function() {
+    await poiService.deleteAllUsers();
+    const user = await poiService.createUser(newUser);
+    await poiService.authenticate(newUser);
     for (let u of users) {
       await poiService.createUser(u);
     }
+
+    const testUser = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password
+    };
+
+    users.unshift(testUser);
 
     const allUsers = await poiService.getUsers();
     for (var i = 0; i < users.length; i++) {
@@ -75,8 +95,11 @@ suite('Users API tests', function() {
   });
 
   test('get all users empty', async function() {
+    await poiService.deleteAllUsers();
+    const user = await poiService.createUser(newUser);
+    await poiService.authenticate(user);
     const allUsers = await poiService.getUsers();
-    assert.equal(allUsers.length, 0);
+    assert.equal(allUsers.length, 1);
   });
 
 });

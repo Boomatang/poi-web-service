@@ -20,4 +20,6 @@ module.exports = [
   {method: 'DELETE', path: '/api/user', config: Accounts.deleteAll},
   {method: 'DELETE', path: '/api/user/{id}', config: Accounts.deleteOne},
 
+  {method: 'POST', path: '/api/user/authenticate', config: Accounts.authenticate}
+
 ];

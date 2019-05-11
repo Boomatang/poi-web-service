@@ -39,13 +39,35 @@ const POI = {
       strategy: 'jwt'
     },
     handler: async function (request, h) {
-      console.log(request.payload);
       const newPoi = new Poi(request.payload);
       const poi = await newPoi.save();
       if (poi){
         return h.response(poi).code(201);
       }
       return Boom.badImplementation("error creating poi")
+
+    }
+  },
+  update: {
+    auth: {
+      strategy: 'jwt'
+    },
+    handler: async function (request, h) {
+      const poiId = request.payload._id;
+      const updatePoi = request.payload;
+
+      const systemPoi = await Poi.findOne({_id: poiId});
+
+      systemPoi.name = updatePoi.name;
+      systemPoi.description = updatePoi.description;
+      systemPoi.geo.lat = updatePoi.geo.lat;
+      systemPoi.geo.long = updatePoi.geo.long;
+
+      const poi = await systemPoi.save();
+      if (poi){
+        return h.response(poi).code(201);
+      }
+      return Boom.badImplementation("error error poi")
 
     }
   },

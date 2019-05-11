@@ -29,5 +29,5 @@ db.on('disconnected', function () {
 
 db.once('open', function () {
   console.log(`database connected tp ${this.name} on ${this.host}`);
-  // seed();
+  seed();
 });

@@ -9,6 +9,7 @@ module.exports = [
   {method: 'GET', path: '/api/poi', config: POI.find},
   {method: 'GET', path: '/api/poi/{id}', config: POI.findOne},
   {method: 'POST', path: '/api/poi', config: POI.create},
+  {method: 'PUT', path: '/api/poi', config: POI.update},
   {method: 'DELETE', path: '/api/poi/{id}', config: POI.deleteOne},
   {method: 'DELETE', path: '/api/poi', config: POI.deleteAll},
 

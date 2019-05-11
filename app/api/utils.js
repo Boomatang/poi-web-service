@@ -1,11 +1,12 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const secret = 'secretpasswordnotrevealedtoanyone';
 
 exports.createToken = function (user) {
   return jwt.sign(
     {id: user._id, email: user.email},
-    'secretpasswordnotrevealedtoanyone',
+    secret,
     {algorithm: 'HS256',
     expiresIn: '1h'}
     );
@@ -14,7 +15,7 @@ exports.createToken = function (user) {
 exports.decodeToken = function (token) {
   var userInfo = {};
   try {
-    var decoded = jwt.verify(token, 'secretpasswordnotrevealedtoanyone');
+    var decoded = jwt.verify(token, secret);
     userInfo.userId = decoded.id;
     userInfo.email = decoded.email;
   } catch (e) {
@@ -30,4 +31,19 @@ exports.validate = async function(decoded, request){
   } else {
     return {isValid: true};
   }
+};
+
+exports.getUserIdFromRequest = function(request) {
+  var userId = null;
+  try {
+    const authorization = request.headers.authorization;
+    var token = authorization.split(' ')[1];
+    console.log(token);
+    var decodedToken = jwt.verify(token, secret);
+    userId = decodedToken.id
+
+  } catch (e) {
+    userId = null;
+  }
+  return userId;
 };

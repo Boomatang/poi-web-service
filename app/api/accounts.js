@@ -72,6 +72,50 @@ const Accounts = {
 
     }
   },
+
+  findCurrent: {
+    auth: {
+      strategy: 'jwt'
+    },
+    handler: async function (request, h) {
+      const userId = utils.getUserIdFromRequest(request);
+      // console.log(userId);
+      const user = await User.findOne({_id: userId});
+      // console.log(user);
+      return user
+
+    }
+  },
+
+  update: {
+    auth: {
+      strategy: 'jwt'
+    },
+    handler: async function (request, h) {
+      console.log(request.payload);
+
+      const userId = utils.getUserIdFromRequest(request);
+      console.log(userId);
+
+      const remoteUser = request.payload;
+
+      const currentUser = await User.findById(userId);
+
+      currentUser.firstName = remoteUser.firstName;
+      currentUser.lastName = remoteUser.lastName;
+      currentUser.email = remoteUser.email;
+      currentUser.password = remoteUser.password;
+
+      const user = await currentUser.save();
+      if (user){
+        return h.response(user).code(201);
+      }
+      return Boom.badImplementation("error updating user")
+
+    }
+  },
+
+
   deleteOne: {
     auth: {
       strategy: 'jwt'

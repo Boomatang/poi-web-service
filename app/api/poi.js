@@ -2,6 +2,7 @@
 
 const Boom = require('boom');
 const Poi = require('../models/poi');
+const Utils = require('./utils');
 
 
 const POI = {
@@ -20,6 +21,7 @@ const POI = {
     auth: {
         strategy: 'jwt'
       },
+    // auth: false,
     handler: async function (request, h) {
       try {
         const poi = await Poi.findOne({_id: request.params.id});
@@ -92,8 +94,32 @@ const POI = {
       await Poi.deleteMany({});
       return {success: true};
     }
-  }
+  },
 
+  createComment: {
+    auth: {
+      strategy: 'jwt'
+    },
+    // auth: false,
+
+    handler: async function (request, h) {
+
+      try {
+        const poi = await Poi.findOne({_id: request.params.id});
+        const comment = request.payload;
+        comment.date = Utils.getCurrentDateTimeString();
+
+        await poi.comments.push(comment);
+
+        return h.response(poi).code(201);
+
+
+      } catch (e) {
+        // console.log(e);
+        return Boom.notFound('Comment Not Created')
+      }
+    }
+  }
 
 };
 

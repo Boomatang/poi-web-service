@@ -12,6 +12,7 @@ const poiSchema = new Schema({
   },
   image: String,
   category: String,
+  comments: [],
   // category: {
   //   type: Schema.Types.ObjectId,
   //   ref: 'Category'

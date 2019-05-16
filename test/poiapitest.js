@@ -9,6 +9,7 @@ suite('POI API tests', function() {
   let pois = fixtures.POI;
   let newPoi = fixtures.newPoi;
   let newUser = fixtures.newUser;
+  let newComment = fixtures.newComment;
 
   const poiService = new PoiService(fixtures.poiService);
 
@@ -84,5 +85,18 @@ suite('POI API tests', function() {
     const allPois = await poiService.getPois();
     assert.equal(allPois.length, 0);
   });
+
+  test('add comment to poi', async function () {
+    const p1 = await poiService.createPoi(newPoi);
+    const returnedComment = await poiService.createComment(p1._id, newComment);
+    // assert.isDefined(comment.date);
+    const rC1 = returnedComment.comments[0];
+    console.log(rC1);
+    console.log(newComment);
+    // assert(_.some(newComment, rC1), 'returned comment must be a superset of newComment')
+    assert(_.some([rC1], newComment), 'Not super sets of comments')
+  })
+
+
 
 });

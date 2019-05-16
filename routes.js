@@ -13,6 +13,8 @@ module.exports = [
   {method: 'DELETE', path: '/api/poi/{id}', config: POI.deleteOne},
   {method: 'DELETE', path: '/api/poi', config: POI.deleteAll},
 
+  {method: 'POST', path: '/api/poi/{id}/comment', config: POI.createComment},
+
 
   {method: 'GET', path: '/api/user', config: Accounts.find},
   {method: 'GET', path: '/api/user/current', config: Accounts.findCurrent},

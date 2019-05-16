@@ -60,5 +60,9 @@
     "lastName": "Jones",
     "email": "martin@jones.com",
     "password": "cat"
+  },
+  "newComment": {
+    "userName": "Martin Jones",
+    "comment": "This is the added comment"
   }
 }

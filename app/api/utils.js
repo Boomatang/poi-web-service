@@ -47,3 +47,14 @@ exports.getUserIdFromRequest = function(request) {
   }
   return userId;
 };
+
+exports.getCurrentDateTimeString = function () {
+  const currentDate = new Date();
+  const datetime = currentDate.getDate() + "/"
+    + (currentDate.getMonth() + 1) + "/"
+    + currentDate.getFullYear() + " @ "
+    + currentDate.getHours() + ":"
+    + currentDate.getMinutes();
+
+  return datetime
+};

@@ -34,6 +34,19 @@ class PoiService {
     }
   }
 
+  async createComment(poi_id, comment) {
+    try {
+      let url = `${this.baseUrl}/api/poi/${poi_id}/comment`;
+      // console.log(url);
+      const response = await axios.post(url, comment);
+      return response.data;
+
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
   async deleteOnePoi(id) {
     try {
       const response = await axios.delete(this.baseUrl + '/api/poi/' + id);

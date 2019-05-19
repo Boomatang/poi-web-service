@@ -58,3 +58,14 @@ exports.getCurrentDateTimeString = function () {
 
   return datetime
 };
+
+exports.getUserFullName = async function (request) {
+  const userId = this.getUserIdFromRequest(request);
+  const user = await User.findOne({_id: userId});
+
+  if(user){
+    return `${user.firstName} ${user.lastName}`;
+  } else {
+    return undefined;
+  }
+};

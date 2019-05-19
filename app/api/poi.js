@@ -108,14 +108,16 @@ const POI = {
         const poi = await Poi.findOne({_id: request.params.id});
         const comment = request.payload;
         comment.date = Utils.getCurrentDateTimeString();
+        comment.userName = await Utils.getUserFullName(request);
 
         await poi.comments.push(comment);
+        await poi.save();
 
-        return h.response(poi).code(201);
+        return h.response(comment).code(201);
 
 
       } catch (e) {
-        // console.log(e);
+        console.log(e);
         return Boom.notFound('Comment Not Created')
       }
     }
